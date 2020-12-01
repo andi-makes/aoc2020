@@ -16,3 +16,6 @@ Standard CMake Stuff. Resulting binaries will be in the `bin` folder.
  * [derNiklaas](https://github.com/derNiklaas/AoC-2020)
  * [LeMoonStar](https://github.com/LeMoonStar/AoC20) is using `C++`!
  * [networkException](https://github.com/networkException/AdventOfCode)
+ * [Trojaner](https://github.com/TrojanerHD/AdventofCode2020) is using `TypeScript` with `Deno`!
+ * [daanbreur](https://github.com/daanbreur/AdventofCode) is using `python`!
+ * [1Turtle](https://github.com/1Turtle/AoC20)
