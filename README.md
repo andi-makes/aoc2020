@@ -13,9 +13,10 @@ Advent of Code 2020 - My solutions using C++
 Standard CMake Stuff. Resulting binaries will be in the `bin` folder.
 
 # Other awesome solutions!
- * [derNiklaas](https://github.com/derNiklaas/AoC-2020)
+ * [derNiklaas](https://github.com/derNiklaas/AoC-2020) is using `Java`!
  * [LeMoonStar](https://github.com/LeMoonStar/AoC20) is using `C++`!
- * [networkException](https://github.com/networkException/AdventOfCode)
+ * [networkException](https://github.com/networkException/AdventOfCode) is using `TypeScript` with `Node`!
  * [Trojaner](https://github.com/TrojanerHD/AdventofCode2020) is using `TypeScript` with `Deno`!
  * [daanbreur](https://github.com/daanbreur/AdventofCode) is using `python`!
- * [1Turtle](https://github.com/1Turtle/AoC20)
+ * [1Turtle](https://github.com/1Turtle/AdventOfCode2020) is using `C++`!
+ * [syncopsta](https://github.com/syncopsta/aoc_2020) is using `python`!

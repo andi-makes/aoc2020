@@ -10,7 +10,8 @@
             "name": "Launch Program",
             "target": "./bin/launcher",
             "cwd": "${workspaceRoot}",
-            "valuesFormatting": "parseText"
+            "valuesFormatting": "parseText",
+            "preLaunchTask": "build"
         }
     ]
 }

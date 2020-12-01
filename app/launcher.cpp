@@ -1,3 +1,4 @@
+#include <chrono>
 #include <iostream>
 
 int day1[200] = {
@@ -20,32 +21,52 @@ int day1[200] = {
 	1844, 1465, 1595, 1957, 1472, 219,	1851, 1955
 };
 
+int day1_1() {
+	for (int i = 0; i < 200; ++i) {
+		for (int j = i + 1; j < 200; j++) {
+			if (day1[i] + day1[j] == 2020) {
+				// 436404
+				return day1[i] * day1[j];
+			}
+		}
+	}
+	return -1;
+}
+
+int day1_2() {
+	for (int i = 0; i < 200; ++i) {
+		for (int j = i + 1; j < 200; j++) {
+			int sum = day1[i] + day1[j];
+			if (sum < 2020) {
+				for (int k = j + 1; k < 200; ++k) {
+					if (sum + day1[k] == 2020) {
+						// 274879808
+						return day1[i] * day1[j] * day1[k];
+					}
+				}
+			}
+		}
+	}
+	return -1;
+}
+
 int main() {
 	std::cout << "Yeah, who am I kidding. I didn't program a launcher "
-				 "beforehand. \nHere, watch this cat video instead.: "
+				 "beforehand. \nHere, watch this cat video instead: "
 				 "https://cutt.ly/nhkFOYo"	  // Sorry, but this is a bad cat
 											  // vid. I literally took the first
 											  // video from youtube.
 			  << std::endl;
 
-	for (int i = 0; i < 200; ++i) {
-		for (int j = i + 1; j < 200; j++) {
-			int sum = day1[i] + day1[j];
-			if (sum < 2020) {
-				for (int k = j; k < 200; ++k) {
-					if (sum + day1[k] == 2020) {
-						std::cout << day1[i] * day1[j] * day1[k] << std::endl;
-						goto end;
-					}
-				}
-			}
-			// if (day1[i] + day1[j] == 2020) {
-			// 	std::cout << day1[i] * day1[j] << std::endl; // 436404
-			// 	goto end;
-			// }
-		}
-	}
-end:
+	auto start	= std::chrono::high_resolution_clock::now();
+	auto result = day1_2();
+	auto end	= std::chrono::high_resolution_clock::now();
+
+	std::cout << "Result: " << result << "\nTime: "
+			  << std::chrono::duration_cast<std::chrono::microseconds>(end -
+																	   start)
+					 .count()
+			  << " us" << std::endl;
 
 	return 0;
 }
