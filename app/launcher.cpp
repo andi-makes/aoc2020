@@ -1,5 +1,8 @@
 #include <chrono>
+#include <fstream>
 #include <iostream>
+#include <string>
+#include <vector>
 
 int day1[200] = {
 	1130, 1897, 1850, 1218, 1198, 1761, 1082, 1742, 1821, 1464, 1834, 1413,
@@ -50,6 +53,57 @@ int day1_2() {
 	return -1;
 }
 
+int day2_1() {
+	std::ifstream input{ "day2.txt" };
+	int min, max;
+	char character;
+	char tmp;
+	std::string pwd;
+
+	std::vector<std::string> valid;
+	int valid_count = 0;
+
+	while (input >> min >> tmp >> max >> character >> tmp >> pwd) {
+		// std::cout << min << " - " << max << " " << character << ": " << pwd
+		// 		  << std::endl;
+		int count = 0;
+		for (char c : pwd) {
+			if (c == character) {
+				++count;
+			}
+		}
+		if (count <= max && count >= min) {
+			valid.push_back(pwd);
+			++valid_count;
+		}
+	}
+	return valid_count;
+}
+
+int day2_2() {
+	std::ifstream input{ "day2.txt" };
+	int min, max;
+	char character;
+	char tmp;
+	std::string pwd;
+
+	std::vector<std::string> valid;
+	int valid_count = 0;
+
+	while (input >> min >> tmp >> max >> character >> tmp >> pwd) {
+		if (pwd.c_str()[min - 1] != pwd.c_str()[max - 1]) {
+			if (pwd.c_str()[min - 1] == character ||
+				pwd.c_str()[max - 1] == character) {
+				valid_count++;
+				// std::cout << pwd.c_str()[min - 1] << " " << min << " "
+				// 		  << pwd.c_str()[max - 1] << " " << max << ": "
+				// 		  << character << ": " << pwd << std::endl;
+			}
+		}
+	}
+	return valid_count;
+}
+
 int main() {
 	std::cout << "Yeah, who am I kidding. I didn't program a launcher "
 				 "beforehand. \nHere, watch this cat video instead: "
@@ -59,7 +113,7 @@ int main() {
 			  << std::endl;
 
 	auto start	= std::chrono::high_resolution_clock::now();
-	auto result = day1_2();
+	auto result = day2_2();
 	auto end	= std::chrono::high_resolution_clock::now();
 
 	std::cout << "Result: " << result << "\nTime: "

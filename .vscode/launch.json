@@ -8,8 +8,8 @@
             "type": "gdb",
             "request": "launch",
             "name": "Launch Program",
-            "target": "./bin/launcher",
-            "cwd": "${workspaceRoot}",
+            "target": "./launcher",
+            "cwd": "${workspaceRoot}/bin",
             "valuesFormatting": "parseText",
             "preLaunchTask": "build"
         }
