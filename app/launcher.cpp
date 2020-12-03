@@ -104,6 +104,62 @@ int day2_2() {
 	return valid_count;
 }
 
+int get_trees(const std::vector<std::string>& input, int incx, int incy) {
+	int width = input[0].length();
+	int index = 0;
+	int trees = 0;
+	for (int i = 0; i < input.size(); i += incy) {
+		if (input[i][index % width] == '#') {
+			++trees;
+		}
+		index += incx;
+	}
+
+	return trees;
+}
+
+int day3_1() {
+	std::ifstream input{ "day3.txt" };
+
+	std::vector<std::string> data;
+
+	std::string line;
+	while (std::getline(input, line)) {
+		data.push_back(line);
+	}
+
+	int width = data[0].length();
+	int index = 0;
+	int trees = 0;
+	for (auto l : data) {
+		if (l[index % width] == '#') {
+			++trees;
+		}
+		index += 3;
+	}
+
+	// if (get_trees(data, 3, 1) == trees) {
+	// std::cout << get_trees(data, 3, 1) << '\n';
+	// }
+
+	return trees;
+}
+
+int day3_2() {
+	std::ifstream input{ "day3.txt" };
+
+	std::vector<std::string> data;
+
+	std::string line;
+	while (std::getline(input, line)) {
+		data.push_back(line);
+	}
+
+	return get_trees(data, 1, 1) * get_trees(data, 3, 1) *
+		   get_trees(data, 5, 1) * get_trees(data, 7, 1) *
+		   get_trees(data, 1, 2);
+}
+
 int main() {
 	std::cout << "Yeah, who am I kidding. I didn't program a launcher "
 				 "beforehand. \nHere, watch this cat video instead: "
@@ -113,7 +169,7 @@ int main() {
 			  << std::endl;
 
 	auto start	= std::chrono::high_resolution_clock::now();
-	auto result = day2_2();
+	auto result = day3_2();
 	auto end	= std::chrono::high_resolution_clock::now();
 
 	std::cout << "Result: " << result << "\nTime: "
