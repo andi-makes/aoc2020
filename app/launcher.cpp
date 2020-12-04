@@ -1,30 +1,20 @@
 #include <chrono>
 #include <fstream>
 #include <iostream>
+#include <regex>
+#include <sstream>
 #include <string>
 #include <vector>
 
-int day1[200] = {
-	1130, 1897, 1850, 1218, 1198, 1761, 1082, 1742, 1821, 1464, 1834, 1413,
-	1917, 1746, 1954, 1942, 1560, 1227, 1852, 1976, 1773, 1404, 1824, 1011,
-	1532, 1306, 1819, 1739, 1540, 1973, 1436, 1196, 1176, 1856, 1332, 1617,
-	1895, 1749, 1718, 1536, 1811, 113,	1008, 1908, 1799, 1914, 1603, 1782,
-	1980, 1228, 1838, 2006, 1953, 1846, 1903, 1470, 1774, 1599, 1446, 1324,
-	1054, 1952, 1928, 1997, 1764, 1943, 1932, 1615, 1428, 1036, 721,  1097,
-	1998, 1033, 1892, 1904, 1803, 1825, 1370, 1836, 1853, 1963, 1469, 1385,
-	246,  1987, 1153, 178,	1790, 1927, 1139, 1865, 1804, 1974, 1235, 1681,
-	1185, 2009, 1894, 1141, 1203, 1808, 1867, 1274, 1891, 1779, 1342, 1920,
-	851,  1994, 1975, 1979, 1880, 1647, 1365, 448,	1119, 1256, 1212, 1268,
-	1878, 1805, 1889, 1870, 1906, 1959, 1898, 1305, 1559, 1088, 1845, 1783,
-	1841, 1864, 1961, 1267, 1437, 1823, 801,  1579, 1538, 1745, 1972, 1259,
-	1899, 1517, 1940, 1543, 1882, 1933, 1240, 1608, 1263, 1429, 1197, 1508,
-	1631, 1988, 1350, 1638, 1800, 1999, 1822, 1776, 1896, 1610, 1831, 1921,
-	1535, 1526, 1491, 1876, 1476, 1945, 1702, 1900, 1814, 1289, 1992, 1859,
-	1967, 1966, 1283, 2002, 1195, 1066, 1924, 1968, 1835, 1971, 1977, 1430,
-	1844, 1465, 1595, 1957, 1472, 219,	1851, 1955
-};
-
 int day1_1() {
+	std::ifstream input{ "day1.txt" };
+	std::vector<int> day1;
+
+	int buf = 0;
+	while (input >> buf) {
+		day1.push_back(buf);
+	}
+
 	for (int i = 0; i < 200; ++i) {
 		for (int j = i + 1; j < 200; j++) {
 			if (day1[i] + day1[j] == 2020) {
@@ -37,6 +27,14 @@ int day1_1() {
 }
 
 int day1_2() {
+	std::ifstream input{ "day1.txt" };
+	std::vector<int> day1;
+
+	int buf = 0;
+	while (input >> buf) {
+		day1.push_back(buf);
+	}
+
 	for (int i = 0; i < 200; ++i) {
 		for (int j = i + 1; j < 200; j++) {
 			int sum = day1[i] + day1[j];
@@ -138,10 +136,6 @@ int day3_1() {
 		index += 3;
 	}
 
-	// if (get_trees(data, 3, 1) == trees) {
-	// std::cout << get_trees(data, 3, 1) << '\n';
-	// }
-
 	return trees;
 }
 
@@ -160,6 +154,242 @@ int day3_2() {
 		   get_trees(data, 1, 2);
 }
 
+struct Passport {
+	std::string byr;
+	std::string iyr;
+	std::string eyr;
+	std::string hgt;
+	std::string hcl;
+	std::string ecl;
+	std::string pid;
+	std::string cid;
+
+	uint8_t fields;
+
+	Passport() : fields(0) {}
+	static constexpr uint8_t BYR = 0b0000'0001;
+	static constexpr uint8_t IYR = 0b0000'0010;
+	static constexpr uint8_t EYR = 0b0000'0100;
+	static constexpr uint8_t HGT = 0b0000'1000;
+	static constexpr uint8_t HCL = 0b0001'0000;
+	static constexpr uint8_t ECL = 0b0010'0000;
+	static constexpr uint8_t PID = 0b0100'0000;
+	static constexpr uint8_t CID = 0b1000'0000;
+};
+
+int day4_1() {
+	std::ifstream input{ "day4.txt" };
+
+	std::vector<Passport*> data;
+	data.push_back(new Passport());
+
+	std::regex r{ "(\\w{3}):([\\d|#\\w]+)" };
+
+	std::string line;
+	std::string block = "";
+	int valid		  = 0;
+	while (std::getline(input, line)) {
+		if (line == "") {
+			std::sregex_iterator begin{ block.begin(), block.end(), r };
+			std::sregex_iterator end = std::sregex_iterator();
+
+			for (std::sregex_iterator i = begin; i != end; ++i) {
+				std::smatch match = *i;
+				// std::cout << match[1] << " -> " << match[2] << '\n';
+				if (match[1].str() == ("byr")) {
+					data[data.size() - 1]->byr = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::BYR;
+				} else if (match[1].str() == ("iyr")) {
+					data[data.size() - 1]->iyr = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::IYR;
+				} else if (match[1].str() == ("eyr")) {
+					data[data.size() - 1]->eyr = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::EYR;
+				} else if (match[1].str() == ("hgt")) {
+					data[data.size() - 1]->hgt = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::HGT;
+				} else if (match[1].str() == ("hcl")) {
+					data[data.size() - 1]->hcl = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::HCL;
+				} else if (match[1].str() == ("ecl")) {
+					data[data.size() - 1]->ecl = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::ECL;
+				} else if (match[1].str() == ("pid")) {
+					data[data.size() - 1]->pid = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::PID;
+				} else if (match[1].str() == ("cid")) {
+					data[data.size() - 1]->cid = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::CID;
+				}
+			}
+
+			data[data.size() - 1]->fields |= Passport::CID;
+
+			if (data[data.size() - 1]->fields == 0xFF) {
+				++valid;
+			}
+			data.push_back(new Passport());
+			block = "";
+		} else {
+			block += line + ' ';
+		}
+	}
+
+	return valid;
+	// 225 too low
+
+	// Part 2: 162 to high
+}
+
+int day4_2() {
+	std::ifstream input{ "day4.txt" };
+
+	std::vector<Passport*> data;
+	data.push_back(new Passport());
+
+	std::regex r{ "(\\w{3}):([\\d|#\\w]+)" };
+
+	std::string line;
+	std::string block = "";
+	int valid		  = 0;
+	while (std::getline(input, line)) {
+		if (line == "") {
+			std::sregex_iterator begin{ block.begin(), block.end(), r };
+			std::sregex_iterator end = std::sregex_iterator();
+
+			for (std::sregex_iterator i = begin; i != end; ++i) {
+				std::smatch match = *i;
+				// std::cout << match[1] << " -> " << match[2] << '\n';
+				if (match[1].str() == ("byr")) {
+					try {
+						int z = std::stoi(match[2].str());
+						if (z < 1920 || z > 2002) {
+							continue;
+						}
+					} catch (std::invalid_argument e) {
+						continue;
+					}
+
+					data[data.size() - 1]->byr = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::BYR;
+				} else if (match[1].str() == ("iyr")) {
+					try {
+						int z = std::stoi(match[2].str());
+						if (z < 2010 || z > 2020) {
+							continue;
+						}
+					} catch (std::invalid_argument e) {
+						continue;
+					}
+					data[data.size() - 1]->iyr = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::IYR;
+				} else if (match[1].str() == ("eyr")) {
+					try {
+						int z = std::stoi(match[2].str());
+						if (z < 2020 || z > 2030) {
+							continue;
+						}
+					} catch (std::invalid_argument e) {
+						continue;
+					}
+					data[data.size() - 1]->eyr = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::EYR;
+				} else if (match[1].str() == ("hgt")) {
+					std::regex hgt_rgx{ "(\\d+)(cm|in)" };
+					if (std::regex_search(match[2].str(), hgt_rgx)) {
+						std::sregex_iterator hgt_it{ match[2].str().begin(),
+													 match[2].str().end(),
+													 hgt_rgx };
+						if (hgt_it != std::sregex_iterator()) {
+							std::smatch hgt_match = *hgt_it;
+
+							try {
+								int z = std::stoi(hgt_match[1].str());
+								if (hgt_match[2].str() == "cm") {
+									if (z < 150 || z > 193) {
+										continue;
+									}
+								} else if (hgt_match[2].str() == "in") {
+									if (z < 59 || z > 76) {
+										continue;
+									}
+								}
+							} catch (std::invalid_argument e) {
+								continue;
+							}
+						} else {
+							continue;
+						}
+					} else {
+						continue;
+					}
+
+					data[data.size() - 1]->hgt = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::HGT;
+				} else if (match[1].str() == ("hcl")) {
+					std::regex hgt_rgx{ "#[0-9a-f]{6}" };
+
+					if (!std::regex_search(match[2].str(), hgt_rgx)) {
+						continue;
+					}
+
+					// std::sregex_iterator hgt_it{ match[2].str().begin(),
+					// 							 match[2].str().end(),
+					// 							 hgt_rgx };
+					// if (hgt_it == std::sregex_iterator()) {
+					// 	continue;
+					// }
+					data[data.size() - 1]->hcl = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::HCL;
+				} else if (match[1].str() == ("ecl")) {
+					// amb blu brn gry grn hzl oth
+					if (match[2].str() == "amb" || match[2].str() == "blu" ||
+						match[2].str() == "brn" || match[2].str() == "gry" ||
+						match[2].str() == "grn" || match[2].str() == "hzl" ||
+						match[2].str() == "oth") {
+						data[data.size() - 1]->ecl = (match[2].str());
+						data[data.size() - 1]->fields |= Passport::ECL;
+					}
+				} else if (match[1].str() == ("pid")) {
+					std::regex hgt_rgx{ "^\\d{9}$",
+										std::regex_constants::ECMAScript };
+					if (!std::regex_search(match[2].str(), hgt_rgx)) {
+						continue;
+					}
+
+					data[data.size() - 1]->pid = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::PID;
+				} else if (match[1].str() == ("cid")) {
+					data[data.size() - 1]->cid = (match[2].str());
+					data[data.size() - 1]->fields |= Passport::CID;
+				}
+			}
+
+			data[data.size() - 1]->fields |= Passport::CID;
+
+			if (data[data.size() - 1]->fields == 0xFF) {
+				++valid;
+			}
+			data.push_back(new Passport());
+			block = "";
+		} else {
+			block += line + ' ';
+		}
+	}
+
+	for (auto p : data) {
+		if (p->fields == 0xFF) {
+			std::cout << "byr:" << p->byr << "\tiyr:" << p->iyr
+					  << "\teyr:" << p->eyr << "\thgt:" << p->hgt
+					  << "\thcl:" << p->hcl << "\tecl:" << p->ecl
+					  << "\tpid:" << p->pid << '\n';
+		}
+	}
+
+	return valid;
+	// Part 2: 162 to high
+}
+
 int main() {
 	std::cout << "Yeah, who am I kidding. I didn't program a launcher "
 				 "beforehand. \nHere, watch this cat video instead: "
@@ -169,7 +399,7 @@ int main() {
 			  << std::endl;
 
 	auto start	= std::chrono::high_resolution_clock::now();
-	auto result = day3_2();
+	auto result = day4_2();
 	auto end	= std::chrono::high_resolution_clock::now();
 
 	std::cout << "Result: " << result << "\nTime: "
