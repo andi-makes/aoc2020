@@ -390,6 +390,78 @@ int day4_2() {
 	// Part 2: 162 to high
 }
 
+uint32_t day5_1() {
+	std::ifstream input{ "day5.txt" };
+
+	std::vector<uint32_t> passport_data;
+
+	std::string line;
+	uint16_t highest = 0;
+	while (std::getline(input, line)) {
+		uint32_t buffer = 0;
+		for (int i = 0; i < line.length(); ++i) {
+			char c = line[line.length() - 1 - i];
+			if (c == 'B' || c == 'R') {
+				buffer |= (1 << i);
+			}
+		}
+
+		std::replace(line.begin(), line.end(), 'F', '0');
+		std::replace(line.begin(), line.end(), 'B', '1');
+
+		std::replace(line.begin(), line.end(), 'L', '0');
+		std::replace(line.begin(), line.end(), 'R', '1');
+
+		if (buffer > highest) {
+			highest = buffer;
+		}
+
+		passport_data.push_back(buffer);
+	}
+	return highest;
+}
+
+uint32_t day5_2() {
+	std::ifstream input{ "day5.txt" };
+
+	std::vector<uint32_t> passport_data;
+
+	std::string line;
+	uint16_t highest = 0;
+
+	while (std::getline(input, line)) {
+		uint32_t buffer = 0;
+		for (int i = 0; i < line.length(); ++i) {
+			char c = line[line.length() - 1 - i];
+			if (c == 'B' || c == 'R') {
+				buffer |= (1 << i);
+			}
+		}
+
+		std::replace(line.begin(), line.end(), 'F', '0');
+		std::replace(line.begin(), line.end(), 'B', '1');
+
+		std::replace(line.begin(), line.end(), 'L', '0');
+		std::replace(line.begin(), line.end(), 'R', '1');
+
+		if (buffer > highest) {
+			highest = buffer;
+		}
+
+		passport_data.push_back(buffer);
+	}
+
+	std::sort(passport_data.begin(), passport_data.end());
+
+	for (int i = 0; i < passport_data.size(); ++i) {
+		if (passport_data[i] + 1 != passport_data[i + 1]) {
+			return passport_data[i] + 1;
+		}
+	}
+
+	return 0;	 // 195 too low;
+}
+
 int main() {
 	std::cout << "Yeah, who am I kidding. I didn't program a launcher "
 				 "beforehand. \nHere, watch this cat video instead: "
@@ -399,7 +471,7 @@ int main() {
 			  << std::endl;
 
 	auto start	= std::chrono::high_resolution_clock::now();
-	auto result = day4_2();
+	auto result = day5_2();
 	auto end	= std::chrono::high_resolution_clock::now();
 
 	std::cout << "Result: " << result << "\nTime: "
