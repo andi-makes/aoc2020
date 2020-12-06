@@ -20,21 +20,23 @@ struct day {
 
 	void run() {
 		using namespace std::chrono;
+		auto start = high_resolution_clock::now();
 		get_input(data);
+		auto end			= high_resolution_clock::now();
+		auto duration_input = duration_cast<microseconds>(end - start).count();
 
-		auto start	 = high_resolution_clock::now();
-		auto result1 = part1(data);
-		auto end	 = high_resolution_clock::now();
-
+		start			 = high_resolution_clock::now();
+		auto result1	 = part1(data);
+		end				 = high_resolution_clock::now();
 		auto duration_p1 = duration_cast<microseconds>(end - start).count();
 
-		start		 = high_resolution_clock::now();
-		auto result2 = part2(data);
-		end			 = high_resolution_clock::now();
-
+		start			 = high_resolution_clock::now();
+		auto result2	 = part2(data);
+		end				 = high_resolution_clock::now();
 		auto duration_p2 = duration_cast<microseconds>(end - start).count();
 
 		std::cout << '\n'
+				  << number << " [" << duration_input << "us]\n"
 				  << number << ".1: [" << result1 << "|" << duration_p1 << "us]"
 				  << '\n'
 				  << number << ".2: [" << result2 << "|" << duration_p2 << "us]"
