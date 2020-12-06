@@ -10,7 +10,12 @@ Advent of Code 2020 - My solutions using C++
 *Interrested in my solutions from last year? You can find them [here](https://github.com/andi-makes/AdventOfCode2019)!*
 
 # Compilation
-Standard CMake Stuff. Resulting binaries will be in the `bin` folder.
+ * Create a `build` folder in the root of the project.
+ * `cd` into the `build` folder.
+ * Run `cmake ..` with your favorite arguments or use a program like `cmake-gui` on Windows or `ccmake` on Linux.
+ * To build the program, run `cmake --build <path_to_build_folder>`. (e.g. from the root of the project run `cmake --build build)
+ * The resulting binary will be in the `bin` folder.
+ 
 
 # Other awesome solutions!
  * [derNiklaas](https://github.com/derNiklaas/AoC-2020) is using `Java`!
