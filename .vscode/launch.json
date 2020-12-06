@@ -7,8 +7,17 @@
         {
             "type": "gdb",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch Program [Linux]",
             "target": "./launcher",
+            "cwd": "${workspaceRoot}/bin",
+            "valuesFormatting": "parseText",
+            "preLaunchTask": "build"
+        },
+        {
+            "type": "gdb",
+            "request": "launch",
+            "name": "Launch Program [Windows]",
+            "target": "./launcher.exe",
             "cwd": "${workspaceRoot}/bin",
             "valuesFormatting": "parseText",
             "preLaunchTask": "build"
