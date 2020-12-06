@@ -52,6 +52,7 @@
         "cstring": "cpp",
         "map": "cpp",
         "regex": "cpp",
-        "shared_mutex": "cpp"
+        "shared_mutex": "cpp",
+        "cinttypes": "cpp"
     }
 }
