@@ -28,3 +28,5 @@ Advent of Code 2020 - My solutions using C++
  * [joblo2213](https://github.com/joblo2213/AdventOfCode2020) is using `Java`!
  * [Schlauer-Hax](https://github.com/Schlauer-Hax/advent-of-code) is using `Java`!
  * [Gewi413](https://github.com/Gewi413/AdventOfCode) is using `Kotlin`!
+ * [voruti](https://github.com/voruti/MyAoCSolutions) is using `Java`!
+ * [noeppi-noeppi](https://github.com/noeppi-noeppi/aoc) is using `a different programming language every day`!
