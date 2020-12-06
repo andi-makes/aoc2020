@@ -15,6 +15,7 @@ Advent of Code 2020 - My solutions using C++
  * Run `cmake ..` with your favorite arguments or use a program like `cmake-gui` on Windows or `ccmake` on Linux.
  * To build the program, run `cmake --build <path_to_build_folder>`. (e.g. from the root of the project run `cmake --build build`)
  * The resulting binary will be in the `bin` folder.
+ * **WSL specific problem**: To fix `clock skewed` warning, execute `sudo hwclock -s`, that should fix it for a while.
 
 
 # Other awesome solutions!
