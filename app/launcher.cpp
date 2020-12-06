@@ -1,6 +1,7 @@
 #include <chrono>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <regex>
 #include <sstream>
 #include <string>
@@ -462,6 +463,55 @@ uint32_t day5_2() {
 	return 0;	 // 195 too low;
 }
 
+int day6_1() {
+	std::ifstream input{ "day6.txt" };
+
+	std::string line;
+	int count = 0;
+	std::map<char, bool> q;
+	while (std::getline(input, line)) {
+		if (line == "") {
+			//
+			count += q.size();
+
+			q.clear();
+		} else {
+			for (char c : line) {
+				q[c] = true;
+			}
+		}
+	}
+	return count;
+}
+
+int day6_2() {
+	std::ifstream input{ "day6.txt" };
+
+	std::string line;
+	int line_count = 0;
+	int count	   = 0;
+	std::map<char, int> q;
+	while (std::getline(input, line)) {
+		if (line == "") {
+			//
+			for (auto pair : q) {
+				if (pair.second == line_count) {
+					count++;
+				}
+			}
+
+			line_count = 0;
+			q.clear();
+		} else {
+			for (char c : line) {
+				q[c] += 1;
+			}
+			line_count++;
+		}
+	}
+	return count;
+}
+
 int main() {
 	std::cout << "Yeah, who am I kidding. I didn't program a launcher "
 				 "beforehand. \nHere, watch this cat video instead: "
@@ -471,7 +521,7 @@ int main() {
 			  << std::endl;
 
 	auto start	= std::chrono::high_resolution_clock::now();
-	auto result = day5_2();
+	auto result = day6_2();
 	auto end	= std::chrono::high_resolution_clock::now();
 
 	std::cout << "Result: " << result << "\nTime: "
