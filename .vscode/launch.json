@@ -9,6 +9,7 @@
             "request": "launch",
             "name": "Launch Program",
             "target": "./launcher",
+            "arguments": "DEBUG",
             "cwd": "${workspaceRoot}/bin",
             "valuesFormatting": "parseText",
             "preLaunchTask": "build"

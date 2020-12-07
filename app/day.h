@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include <fmt/format.h>
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -35,12 +36,13 @@ struct day {
 		end				 = high_resolution_clock::now();
 		auto duration_p2 = duration_cast<microseconds>(end - start).count();
 
-		std::cout << '\n'
-				  << number << " [" << duration_input << "us]\n"
-				  << number << ".1: [" << result1 << "|" << duration_p1 << "us]"
-				  << '\n'
-				  << number << ".2: [" << result2 << "|" << duration_p2 << "us]"
-				  << std::endl;
+		fmt::print("{0} [{1}us]\n{0}.1: [{2}|{3}us]\n{0}.2: [{4}|{5}us]\n",
+				   number,
+				   duration_input,
+				   result1,
+				   duration_p1,
+				   result2,
+				   duration_p2);
 	}
 
 	day(int number,
