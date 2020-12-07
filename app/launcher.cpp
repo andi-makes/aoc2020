@@ -1,9 +1,20 @@
 #include "registry.h"
 
+#include <fmt/color.h>
+
 int main(int argc, char** argv) {
-	std::cout << "  ~~ Advent of Code 2020 ~~\n"
-			  << " ~~Solutions by andi_makes ~~\n"
-			  << std::endl;
+	fmt::print(fmt::fg(fmt::terminal_color::blue), "  ~");
+	fmt::print(fmt::fg(fmt::terminal_color::cyan), "~");
+	fmt::print(fmt::fg(fmt::terminal_color::green), "  Advent of Code 2020  ");
+	fmt::print(fmt::fg(fmt::terminal_color::cyan), "~");
+	fmt::print(fmt::fg(fmt::terminal_color::blue), "~\n");
+
+	fmt::print(fmt::fg(fmt::terminal_color::red), " ~");
+	fmt::print(fmt::fg(fmt::terminal_color::magenta), "~");
+	fmt::print(fmt::fg(fmt::terminal_color::yellow),
+			   " Solutions by andi_makes ");
+	fmt::print(fmt::fg(fmt::terminal_color::magenta), "~");
+	fmt::print(fmt::fg(fmt::terminal_color::red), "~\n\n");
 
 	if (argc != 1) {
 		std::cout << "Direct run Mode." << std::endl;
@@ -35,14 +46,17 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	std::cout << "REPL mode. Please enter a command.\n"
-			  << "  * exit, quit ... exit the program\n"
-			  << "  * day[1-25]  ... execute the given day\n"
-			  << std::flush;
+	fmt::print(fmt::fg(fmt::color::medium_sea_green),
+			   "REPL mode. Please enter a command.\n");
+	fmt::print(fmt::fg(fmt::color::indian_red),
+			   "  * exit, quit ... exit the program\n");
+	fmt::print(fmt::fg(fmt::color::indian_red),
+			   "  * day[1-25]  ... execute the given day ★☆◯\n");
 
 	std::string line;
 	while (true) {
-		std::cout << ">: " << std::flush;
+		fmt::print(fmt::fg(fmt::color::chocolate) | fmt::emphasis::bold, ">: ");
+
 		std::getline(std::cin, line);
 
 		if (line == "exit" || line == "quit") {
