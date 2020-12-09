@@ -25,8 +25,8 @@ int main(int argc, char** argv) {
 		// day5.run();
 		// day6.run();
 		// day7.run();
-		day8.run();
-		// day9.run();
+		// day8.run();
+		day9.run();
 		// day10.run();
 		// day11.run();
 		// day12.run();
