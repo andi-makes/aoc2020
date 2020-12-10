@@ -11,7 +11,7 @@ extern day<std::vector<std::string>> day6;
 extern day<std::vector<std::string>> day7;
 extern day<std::vector<std::string>> day8;
 extern day<std::vector<int>> day9;
-extern day<std::vector<std::string>> day10;
+extern day<std::vector<int>> day10;
 extern day<std::vector<std::string>> day11;
 extern day<std::vector<std::string>> day12;
 extern day<std::vector<std::string>> day13;
