@@ -32,5 +32,5 @@ target_link_libraries(launcher fmt)
 
 target_compile_options(launcher PRIVATE "-std=c++2a" "-g" "-O2")
 set(CMAKE_EXE_LINKER_FLAGS
-    -g
+    "-g -flto"
 )
