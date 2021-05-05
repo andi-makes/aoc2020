@@ -108,4 +108,4 @@ namespace {
 	};
 }
 
-auto day18 = day<data_t>(day_number, get_input, p1, p2);
+day<data_t> day18 = day<data_t>(day_number, get_input, p1, p2);

@@ -144,4 +144,4 @@ namespace {
 }
 int ACC::accumulator = 0;
 
-auto day8 = day<data_t>(day_number, get_input, p1, p2);
+day<data_t> day8 = day<data_t>(day_number, get_input, p1, p2);

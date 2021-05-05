@@ -42,4 +42,4 @@ namespace {
 	};
 }
 
-auto day1 = day<std::vector<int>>(1, get_input, p1, p2);
+day<std::vector<int>> day1 = day<std::vector<int>>(1, get_input, p1, p2);
