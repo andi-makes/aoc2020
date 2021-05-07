@@ -3,7 +3,7 @@
 [![About](https://img.shields.io/badge/Advent%20of%20Code-2020-brightgreen)](https://adventofcode.com/2020/about)
 ![Language](https://img.shields.io/badge/Language-C%2B%2B-orange)
 ![Days completed](https://img.shields.io/badge/Days%20completed-19-red)
-![Stars](https://img.shields.io/badge/Stars-38-yellow)
+![Stars](https://img.shields.io/badge/Stars-41-yellow)
 
 Advent of Code 2020 - My solutions using C++
 
